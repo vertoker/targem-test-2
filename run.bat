@@ -3,7 +3,7 @@
 rd /S /Q "build"
 md "build"
 
-g++ -O3 --std=c++11  main.cpp --output="build/executable.exe"
+g++ -O3 --std=c++11  "src/main.cpp" "src/String.h" "src/String.cpp" --output="build/executable.exe"
 
 cd build
 executable.exe

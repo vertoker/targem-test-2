@@ -4,4 +4,5 @@ project(targemtest2 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(${CMAKE_PROJECT_NAME} "main.cpp")
+add_executable(${CMAKE_PROJECT_NAME}
+    "src/main.cpp" "src/String.h" "src/String.cpp")
