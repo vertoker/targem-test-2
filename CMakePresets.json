@@ -2,7 +2,7 @@
     "version": 3,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 10,
+        "minor": 20,
         "patch": 0
     },
 
@@ -10,22 +10,24 @@
         {
             "name": "Debug",
             "hidden": false,
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/Debug",
 
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_CXX_FLAGS": "-O0 --std=c++11",
+                "CMAKE_CXX_FLAGS": "-O0",
                 "CMAKE_CXX_COMPILER": "clang++"
             }
         },
         {
             "name": "Release",
             "hidden": false,
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/Release",
 
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_CXX_FLAGS": "-O3 --std=c++11",
+                "CMAKE_CXX_FLAGS": "-O3",
                 "CMAKE_CXX_COMPILER": "clang++"
             }
         }
