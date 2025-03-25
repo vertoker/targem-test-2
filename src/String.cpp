@@ -28,10 +28,10 @@ String::String( const char* str )
     memcpy( data, str, capacity + 1 );
 }
 
-String::String(const size_t newSize, const size_t newCapacity, char* newData) noexcept
+String::String( const size_t newSize, const size_t newCapacity, char* newData ) noexcept
     : size{ newSize }, capacity{ newCapacity }, data{ newData }
 {
-
+    
 }
 
 String::String( const String& other )

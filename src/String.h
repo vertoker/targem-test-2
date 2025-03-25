@@ -21,8 +21,8 @@ namespace vertoker
         explicit             String( const char* str );
                              String( const size_t newSize, const size_t newCapacity, char* newData ) noexcept;
 
-        explicit             String( const String& other );
-        explicit             String( String&& other ) noexcept;
+                             String( const String& other );
+                             String( String&& other ) noexcept;
 
         /// operators
 
