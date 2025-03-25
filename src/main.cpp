@@ -1,14 +1,25 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 #include <string>
 #include "String.h"
 
 int main()
 {
-    vertoker::String str1 = "targem test 2";
-    vertoker::String str2 = std::move(str1);
+    std::vector<vertoker::String> vec;
 
-    std::cout << str2.GetData() << std::endl;
+    vertoker::String buffer;
+    while (std::cin >> buffer)
+    {
+        if (buffer == "") break;
+        vec.push_back(buffer);
+        buffer.Clear();
+    }
+
+    std::cout << vec.size() << std::endl;
+    for (auto& str : vec)
+        std::cout << str << std::endl;
+    
     return 0;
 }
