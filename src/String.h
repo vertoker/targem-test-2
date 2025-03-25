@@ -61,8 +61,8 @@ namespace vertoker
     private:
         /// private functions
 
-        size_t               GetUnusedCapacity() const      {   return capacity - size;                                }
-        size_t               GetNextCapacity()   const      {   return ( capacity == 0 ) ? 1 : ( (capacity*3+1)/2 );   }
+        size_t               GetUnusedCapacity() const      {   return capacity - size;                                        }
+        size_t               GetNextCapacity()   const      {   return ( capacity == 0 ) ? 1 : ( ( capacity * 3 + 1 ) / 2 );   }
         
         /// data members
 
@@ -85,6 +85,5 @@ namespace vertoker
     std::ostream& operator << ( std::ostream& os, String& str );
 
 } // namespace vertoker
-
 
 #endif // __VERTOKER_STRING_H_

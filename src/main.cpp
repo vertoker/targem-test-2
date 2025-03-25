@@ -7,14 +7,14 @@
 
 struct
 {
-    bool operator()(vertoker::String& a, vertoker::String& b) const
+    bool operator()( vertoker::String& a, vertoker::String& b ) const
     {
-        size_t minsize = (a.GetSize() < b.GetSize()) ? a.GetSize() : b.GetSize();
+        size_t minsize = ( a.GetSize() < b.GetSize() ) ? a.GetSize() : b.GetSize();
     
-        for (size_t i = 0; i < minsize; ++i)
+        for ( size_t i = 0; i < minsize; ++i )
         {
-            if (tolower(a[i]) > tolower(b[i])) return true;
-            if (tolower(a[i]) < tolower(b[i])) return false;
+            if ( tolower( a[ i ] ) > tolower( b[ i ] ) ) return true;
+            if ( tolower( a[ i ] ) < tolower( b[ i ] ) ) return false;
         }
         return a.GetSize() > b.GetSize();
     }
@@ -22,20 +22,21 @@ struct
 
 int main()
 {
-    std::vector<vertoker::String> vec;
-
+    std::vector< vertoker::String > vec;
     vertoker::String buffer;
-    while (std::cin >> buffer)
+
+    while ( std::cin >> buffer )
     {
-        if (buffer == "") break;
-        vec.push_back(buffer);
+        if ( buffer == "" ) break;
+
+        vec.push_back( buffer );
         buffer.Clear();
     }
 
-    std::sort(vec.begin(), vec.end(), lessPred);
+    std::sort( vec.begin(), vec.end(), lessPred );
 
     //std::cout << vec.size() << std::endl;
-    for (auto& str : vec)
+    for ( auto& str : vec )
         std::cout << str << std::endl;
     
     return 0;
