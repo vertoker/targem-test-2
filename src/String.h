@@ -49,7 +49,6 @@ namespace vertoker
 
         // public functions
         void Reserve(const size_t newCapacity);
-        void Resize(const size_t newSize, const char defaultChar);
         void PushBack(char character);
         void Clear() noexcept;
 

@@ -81,19 +81,30 @@ bool vertoker::operator==(const String& lhs, const String& rhs)
 {
     if (lhs.size != rhs.size) return false;
 
-    for (size_t i = 0; i < lhs.size; i++)
+    for (size_t i = 0; i < lhs.size; ++i)
         if (lhs[i] != rhs[i]) return false;
     return true;
 }
-bool vertoker::operator==(const String& lhs, const char* rhs) // TODO
+bool vertoker::operator==(const String& lhs, const char* rhs)
 {
     //if (lhs.size != strlen(rhs)) return false;
-    return false;
+    size_t i = 0;
+    for (; i < lhs.size; ++i)
+    {
+        if (!rhs[i] || // if lhs.size > rhs.size
+            lhs[i] != rhs[i]) // if not equal
+            return false;
+    }
+    return !rhs[i]; // if lhs.size < rhs.size
 }
 bool vertoker::operator!=(const String& lhs, const String& rhs)
-    { return !(lhs == rhs); }
+{
+    return !(lhs == rhs);
+}
 bool vertoker::operator!=(const String& lhs, const char* rhs)
-    { return !(lhs == rhs); }
+{
+    return !(lhs == rhs);
+}
 
 void String::operator+=(const String& rhs)
 {
@@ -166,20 +177,6 @@ void String::Reserve(const size_t newCapacity)
 
     capacity = newCapacity;
     data = newData;
-}
-void String::Resize(const size_t newSize, const char defaultChar) // TODO
-{
-    if (newSize <= size) return;
-
-    if (newSize > capacity)
-    {
-        size_t nextCapacity = GetNextCapacity();
-        Reserve((nextCapacity > newSize) ? nextCapacity : newSize);
-    }
-
-    memset(data + size, defaultChar, newSize - size);
-    size = newSize;
-    data[size - 1] = 0;
 }
 void String::PushBack(char character)
 {
