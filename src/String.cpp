@@ -68,9 +68,9 @@ String& String::operator=(String&& other) noexcept
     capacity = other.capacity;
     data = other.data;
 
-    size = 0;
-    capacity = 0;
-    data = nullptr;
+    other.size = 0;
+    other.capacity = 0;
+    other.data = nullptr;
 
     return *this;
 }
