@@ -47,7 +47,7 @@ String::String(String&& other) noexcept
 
 String& String::operator=(const String& other)
 {
-    if (this != &other) return *this;
+    if (this == &other) return *this;
 
     delete[] data;
 
@@ -60,7 +60,7 @@ String& String::operator=(const String& other)
 }
 String& String::operator=(String&& other) noexcept
 {
-    if (this != &other) return *this;
+    if (this == &other) return *this;
 
     delete[] data;
 
