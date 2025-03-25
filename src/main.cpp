@@ -5,6 +5,21 @@
 #include <string>
 #include "String.h"
 
+struct
+{
+    bool operator()(vertoker::String& a, vertoker::String& b) const
+    {
+        size_t minsize = (a.GetSize() < b.GetSize()) ? a.GetSize() : b.GetSize();
+    
+        for (size_t i = 0; i < minsize; ++i)
+        {
+            if (tolower(a[i]) > tolower(b[i])) return true;
+            if (tolower(a[i]) < tolower(b[i])) return false;
+        }
+        return a.GetSize() > b.GetSize();
+    }
+} customLess;
+
 int main()
 {
     std::vector<vertoker::String> vec;
@@ -17,7 +32,9 @@ int main()
         buffer.Clear();
     }
 
-    std::cout << vec.size() << std::endl;
+    std::sort(vec.begin(), vec.end(), customLess);
+
+    //std::cout << vec.size() << std::endl;
     for (auto& str : vec)
         std::cout << str << std::endl;
     
