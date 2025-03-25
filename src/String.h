@@ -11,69 +11,78 @@ namespace vertoker
     class String
     {
     public:
-        // default ctor/dtor
-        String();
-        ~String();
+        /// default ctor/dtor
 
-        // other ctors
-        String(const char* str);
-        String(const size_t newSize, const size_t newCapacity, char* newData) noexcept;
+                             String();
+                             ~String();
 
-        // copy/move ctors/operators
-        String(const String& other);
-        String(String&& other) noexcept;
-        String& operator=(const String& other);
-        String& operator=(String&& other) noexcept;
+        /// other ctors
 
-        // operators
-        friend bool operator==(const String& lhs, const String& rhs);
-        friend bool operator==(const String& lhs, const char* rhs);
-        friend bool operator!=(const String& lhs, const String& rhs);
-        friend bool operator!=(const String& lhs, const char* rhs);
+        explicit             String( const char* str );
+                             String( const size_t newSize, const size_t newCapacity, char* newData ) noexcept;
 
-        void operator+=(const String& rhs);
-        void operator+=(const char* rhs);
+        explicit             String( const String& other );
+        explicit             String( String&& other ) noexcept;
 
-        friend String operator+(const String& lhs, const String& rhs);
-        friend String operator+(const String& lhs, const char* rhs);
+        /// operators
 
-        friend std::istream& operator>>(std::istream& is, String& str);
-        friend std::ostream& operator<<(std::ostream& os, String& str);
+        String&              operator =  ( const String& other );
+        String&              operator =  ( String&& other ) noexcept;
+
+        inline char&         operator [] ( size_t index ) const   {   return data[index];   }
+        void                 operator += ( const String& rhs );
+        void                 operator += ( const char* rhs );
+
+        /// friend operators
+
+        friend bool          operator == ( const String& lhs, const String& rhs );
+        friend bool          operator == ( const String& lhs, const char* rhs );
+        friend bool          operator != ( const String& lhs, const String& rhs );
+        friend bool          operator != ( const String& lhs, const char* rhs );
+
+        friend String        operator +  ( const String& lhs, const String& rhs );
+        friend String        operator +  ( const String& lhs, const char* rhs );
+
+        friend std::istream& operator >> ( std::istream& is, String& str );
+        friend std::ostream& operator << ( std::ostream& os, String& str );
+
+        /// public functions
+
+        void                 Reserve(const size_t newCapacity);
+        void                 PushBack(char character);
+        void                 Clear() noexcept;
         
-        // "fields"
-        inline char& operator[](size_t index) const { return data[index]; }
+        /// "fields"
 
-        inline size_t GetSize() const noexcept { return size; }
-        inline size_t GetCapacity() const noexcept { return capacity; }
-        inline char* GetData() const noexcept { return data; }
-
-        // public functions
-        void Reserve(const size_t newCapacity);
-        void PushBack(char character);
-        void Clear() noexcept;
+        inline size_t        GetSize()     const noexcept   {   return size;       }
+        inline size_t        GetCapacity() const noexcept   {   return capacity;   }
+        inline char*         GetData()     const noexcept   {   return data;       }
 
     private:
-        // private functions
-        size_t GetUnusedCapacity() const;
-        size_t GetNextCapacity() const;
+        /// private functions
+
+        size_t               GetUnusedCapacity() const      {   return capacity - size;                                }
+        size_t               GetNextCapacity()   const      {   return ( capacity == 0 ) ? 1 : ( (capacity*3+1)/2 );   }
         
-        // data members
+        /// data members
+
         size_t size;
         size_t capacity;
-        char* data;
+        char*  data;
     };
 
-    // external operators
-    bool operator==(const String& lhs, const String& rhs);
-    bool operator==(const String& lhs, const char* rhs);
-    bool operator!=(const String& lhs, const String& rhs);
-    bool operator!=(const String& lhs, const char* rhs);
+    /// external operators
 
-    String operator+(const String& lhs, const String& rhs);
-    String operator+(const String& lhs, const char* rhs);
+    bool          operator == ( const String& lhs, const String& rhs );
+    bool          operator == ( const String& lhs, const char* rhs );
+    bool          operator != ( const String& lhs, const String& rhs );
+    bool          operator != ( const String& lhs, const char* rhs );
 
-    std::istream& operator>>(std::istream& is, String& str);
-    std::ostream& operator<<(std::ostream& os, String& str);
+    String        operator +  ( const String& lhs, const String& rhs );
+    String        operator +  ( const String& lhs, const char* rhs );
+
+    std::istream& operator >> ( std::istream& is, String& str );
+    std::ostream& operator << ( std::ostream& os, String& str );
 
 } // namespace vertoker
 
