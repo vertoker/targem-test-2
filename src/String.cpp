@@ -4,9 +4,6 @@
 
 using namespace vertoker;
 
-// for consistency with std::string
-static constexpr double GrowthFactor = 2.0;
-
 // default ctor/dtor
 
 String::String() : size{0}, capacity{0}
@@ -27,7 +24,7 @@ String::String(const char* str)
     data = new char[capacity + 1];
     memcpy(data, str, capacity + 1);
 }
-String::String(const size_t newSize, const size_t newCapacity, char* newData)
+String::String(const size_t newSize, const size_t newCapacity, char* newData) noexcept
     : size{newSize}, capacity{newCapacity}, data(newData) { }
 
 // move/copy ctors/operators
@@ -87,7 +84,6 @@ bool vertoker::operator==(const String& lhs, const String& rhs)
 }
 bool vertoker::operator==(const String& lhs, const char* rhs)
 {
-    //if (lhs.size != strlen(rhs)) return false;
     size_t i = 0;
     for (; i < lhs.size; ++i)
     {
@@ -188,11 +184,16 @@ void String::PushBack(char character)
 }
 void String::Clear() noexcept
 {
-    memset(data, 0, capacity);
+    memset(data, 0, capacity + 1);
     size = 0;
 }
 
 size_t String::GetUnusedCapacity() const
-    { return capacity - size; }
+{
+    return capacity - size;
+}
 size_t String::GetNextCapacity() const
-    { return capacity == 0 ? 1 : (size_t)(capacity * GrowthFactor); }
+{
+    // https://github.com/facebook/folly/blob/2971b8e5fc552f543fa25ba6f203df6d6810ed1d/folly/container/FBVector.h#L1172
+    return (capacity == 0) ? 1 : ((capacity * 3 + 1) / 2);
+}

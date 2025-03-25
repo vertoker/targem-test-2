@@ -17,7 +17,7 @@ namespace vertoker
 
         // other ctors
         String(const char* str);
-        String(const size_t newSize, const size_t newCapacity, char* newData);
+        String(const size_t newSize, const size_t newCapacity, char* newData) noexcept;
 
         // copy/move ctors/operators
         String(const String& other);
@@ -57,7 +57,7 @@ namespace vertoker
         size_t GetUnusedCapacity() const;
         size_t GetNextCapacity() const;
         
-        // data
+        // data members
         size_t size;
         size_t capacity;
         char* data;

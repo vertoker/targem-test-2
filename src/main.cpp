@@ -18,7 +18,7 @@ struct
         }
         return a.GetSize() > b.GetSize();
     }
-} customLess;
+} lessPred;
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
         buffer.Clear();
     }
 
-    std::sort(vec.begin(), vec.end(), customLess);
+    std::sort(vec.begin(), vec.end(), lessPred);
 
     //std::cout << vec.size() << std::endl;
     for (auto& str : vec)
