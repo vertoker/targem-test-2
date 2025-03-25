@@ -39,5 +39,7 @@ int main()
     for ( auto& str : vec )
         std::cout << str << std::endl;
     
+    std::cin.ignore(); // for console app
+    
     return 0;
 }
